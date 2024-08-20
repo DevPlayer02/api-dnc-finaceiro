@@ -4,6 +4,7 @@ import cors from 'cors';
 dotenv.config();
 import userRouter from './modules/user/user.route.js';
 import authRouter from './modules/auth/auth.route.js';
+import categoryRouter from './modules/categories/category.route.js';
 import bearerToken from 'express-bearer-token';
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(bearerToken());
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
+app.use('/categories', categoryRouter);
 
 app.get('/health', (_, res) => {
     return res.send ('Sistema está operacional!');
