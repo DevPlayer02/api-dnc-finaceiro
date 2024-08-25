@@ -6,6 +6,7 @@ import userRouter from './modules/user/user.route.js';
 import authRouter from './modules/auth/auth.route.js';
 import categoryRouter from './modules/categories/category.route.js';
 import goalRouter from './modules/goals/goal.route.js';
+import transactionRouter from './modules/transactions/transaction.route.js';
 import bearerToken from 'express-bearer-token';
 
 const app = express();
@@ -16,6 +17,7 @@ app.use('/users', userRouter);
 app.use('/auth', authRouter);
 app.use('/categories', categoryRouter);
 app.use('/goals', goalRouter);
+app.use('/transactions', transactionRouter);
 
 app.get('/health', (_, res) => {
     return res.send ('Sistema está operacional!');
