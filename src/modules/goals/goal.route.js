@@ -15,9 +15,25 @@ router.get('/:id', authMiddleware, async (req, res) => {
 });
 
 router.post('/', authMiddleware, async (req, res) => {
-    req.body.user_id = req.user.id;
-    const data = await save( req.body );
-    res.status(201).json({data});
+    try {
+        req.body.user_id = req.user.id;
+        const { date, description, user_id, value } = req.body;
+    
+        const formattedDate = new Date(date).toISOString().slice(0, 19).replace('T', ' ');
+    
+        const params = {
+          date: formattedDate,
+          description,
+          user_id,
+          value
+        };
+    
+        await save(params);
+    
+        res.status(201).json({ message: 'Meta salva com sucesso' });
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 router.put('/:id', authMiddleware, async (req, res) => {
